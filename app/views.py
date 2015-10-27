@@ -2,14 +2,19 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 
 
 # Create your views here.
 from django.template import RequestContext
+from app.models import Blog
 
 
 def homepage(request):
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/accounts/register')
+
     return render(request, 'default/index.html', {'entity': 'Wow'})
 
 
@@ -23,6 +28,13 @@ def register(request):
         register_form = UserCreationForm()
     return render_to_response('account/register.html', {'form': register_form},
                               context_instance=RequestContext(request))
+
+
+def about(request):
+    return render(request, 'default/about.html', context_instance=RequestContext(request))
+
+def contact(request):
+    return render(request, 'default/contact.html', context_instance=RequestContext(request))
 
 
 def do_login(request):
@@ -49,3 +61,11 @@ def logout(request):
     auth.logout(request)
     # Redireccciona a una página de entrada correcta.
     return HttpResponseRedirect("/")
+
+def blog_list(request):
+    entities = Blog.objects.all()
+    return render(request, 'blog/index.html', { 'entities': entities }, context_instance=RequestContext(request))
+
+def blog_details(request, blog_id):
+    entity = get_object_or_404(Blog, pk = blog_id)
+    return render(request, 'blog/details.html', { 'entity': entity }, context_instance=RequestContext(request))

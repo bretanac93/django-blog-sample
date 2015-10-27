@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}Blog List{% endblock %}
+{% block body %}
+    <h1>Blogs List</h1>
+    {% for item in entities %}
+        <h3>{{ item }}</h3>
+        <small>{{ item.creation_date | timesince }}</small>
+        <small>{{ item.owner }}</small>
+        <p>{{ item.description }}</p>
+    {% empty %}
+        <h3>Sorry, not any blogs in the system.</h3>
+    {% endfor %}
+{% endblock %}

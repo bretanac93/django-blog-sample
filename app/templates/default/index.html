@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
 {% block body %}
     {% if user.is_authenticated %}
         <h1>Welcome {{ user }}</h1>

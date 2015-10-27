@@ -16,10 +16,15 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'app.views.homepage', name='app_homepage'),
     url(r'^accounts/register/$', 'app.views.register', name='app_register'),
+    url(r'^$', 'app.views.homepage', name='app_homepage'),
     url(r'^accounts/login/$', 'app.views.do_login', name='app_login'),
-    url(r'^accounts/logout/$', 'app.views.logout', name='app_logout')
+    url(r'^accounts/logout/$', 'app.views.logout', name='app_logout'),
+    url(r'^about/', 'app.views.about', name='app_about'),
+    url(r'^contact/', 'app.views.contact', name='app_contact'),
+    url(r'^blog/$', 'app.views.blog_list', name='blog_index'),
+    url(r'^blog/(?P<blog_id>[0-9]+)$', 'app.views.blog_details', name='blog_details')
 ]
