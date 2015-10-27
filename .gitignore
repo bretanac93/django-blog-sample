@@ -1,0 +1,10 @@
+*.pyc
+localsettings.py
+/assets/files/*
+pip-log.txt
+*.DS_Store
+Thumbs.db
+*.zip
+*.log
+/.idea
+*.sqlite3

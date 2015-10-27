@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block body %}
+    {% if form.errors %}
+        <p class="error">Lo sentimos, la contraseña y el nombre de usuario no son
+            validos</p>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next|escape }}"/>
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}
